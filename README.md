@@ -13,16 +13,21 @@ go get -u github.com/petoem/gormlog
 ## Usage
 
 ```go
-import (
-	"gorm.io/gorm"
-    "gorm.io/driver/sqlite"
-    "github.com/rs/zerolog/log"
+package main
 
-    "github.com/petoem/gormlog"
+import (
+	"github.com/rs/zerolog/log"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+
+	"github.com/petoem/gormlog"
 )
 
-logger := gormlog.NewLogger(log.Logger)
-db, err = gorm.Open(sqlite.Open("db.sqlite"), &gorm.Config{Logger: logger})
+func main() {
+	logger := gormlog.NewLogger(log.Logger)
+	db, err := gorm.Open(sqlite.Open("db.sqlite"), &gorm.Config{Logger: logger})
+	// ...
+}
 ```
 
 ## Contributing

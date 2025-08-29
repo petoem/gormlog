@@ -34,19 +34,19 @@ func (l *logger) LogMode(level gorm.LogLevel) gorm.Interface {
 	return l // return the same logger again, because we can't return an error
 }
 
-func (l *logger) Info(context context.Context, msg string, data ...interface{}) {
+func (l *logger) Info(_ context.Context, msg string, data ...any) {
 	l.log.Info().Msgf(msg, data...)
 }
 
-func (l *logger) Warn(context context.Context, msg string, data ...interface{}) {
+func (l *logger) Warn(_ context.Context, msg string, data ...any) {
 	l.log.Warn().Msgf(msg, data...)
 }
 
-func (l *logger) Error(context context.Context, msg string, data ...interface{}) {
+func (l *logger) Error(_ context.Context, msg string, data ...any) {
 	l.log.Error().Msgf(msg, data...)
 }
 
-func (l *logger) Trace(ctx context.Context, begin time.Time, fc func() (sql string, rowsAffected int64), err error) {
+func (l *logger) Trace(_ context.Context, begin time.Time, fc func() (sql string, rowsAffected int64), err error) {
 	sql, rowsAffected := fc()
 	l.log.Trace().
 		TimeDiff("time", time.Now(), begin).
